@@ -3,6 +3,10 @@
 
 using namespace std;
 
+/**
+ * не, ну а что? просто перебрала все варианты)
+ */
+
 int min_ = 100000;
 vector<int> a;
 int n;
