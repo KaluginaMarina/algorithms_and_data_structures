@@ -145,7 +145,15 @@ int main() {
         for (int i = 0; i < min3; ++i) {
             cout << "GH-" << endl;
         }
-//        cube[7] -= min3;
-//        cube[6] -= min3;
+        cube[7] -= min3;
+        cube[6] -= min3;
     }
+
+    for (int i = 0; i < cube[7]; ++i){
+        cout << "CD+" << endl;
+        cout << "BC-" << endl;
+        cout << "DH-" << endl;
+    }
+    cube[1] -= cube[7];
+    cube[7] = 0;
 }
