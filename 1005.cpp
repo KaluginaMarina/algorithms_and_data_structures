@@ -3,10 +3,6 @@
 
 using namespace std;
 
-/**
- * не, ну а что? просто перебрала все варианты)
- */
-
 int min_ = 100000;
 vector<int> a;
 int n;
@@ -18,7 +14,6 @@ int f(int i, int s1, int s2) {
         f(i + 1, s1 + a[i], s2);
         f(i + 1, s1, s2 + a[i]);
     }
-
     return min_;
 }
 
