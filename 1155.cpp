@@ -1,51 +1,49 @@
 #include <iostream>
 
-using namespace std;
-
 int main() {
     int cube[8] = {};
 
     for (int &i : cube) {
-        cin >> i;
+        std::cin >> i;
     }
 
     if (cube[0] + cube[2] + cube[5] + cube[7] != cube[1] + cube[3] + cube[4] + cube[6]) {
-        cout << "IMPOSSIBLE";
+        std::cout << "IMPOSSIBLE";
         return 0;
     }
 
     // обнуляем вершину А (cube[0])
     if (cube[0] > 0) {
-        int min1 = min(cube[0], cube[1]);
+        int min1 = std::min(cube[0], cube[1]);
         for (int i = 0; i < min1; ++i) {
-            cout << "AB-" << endl;
+            std::cout << "AB-" << std::endl;
         }
         cube[0] -= min1;
         cube[1] -= min1;
 
-        int min2 = min(cube[0], cube[3]);
+        int min2 = std::min(cube[0], cube[3]);
         for (int i = 0; i < min2; ++i) {
-            cout << "AD-" << endl;
+            std::cout << "AD-" << std::endl;
         }
         cube[0] -= min2;
         cube[3] -= min2;
 
-        int min3 = min(cube[0], cube[4]);
+        int min3 = std::min(cube[0], cube[4]);
         for (int i = 0; i < min3; ++i) {
-            cout << "AE-" << endl;
+            std::cout << "AE-" << std::endl;
         }
         cube[0] -= min3;
         cube[4] -= min3;
 
         for (int i = 0; i < cube[0]; ++i) {
-            cout << "BF+" << endl;
+            std::cout << "BF+" << std::endl;
         }
         cube[1] += cube[0];
         cube[5] += cube[0];
 
-        min1 = min(cube[0], cube[1]);
+        min1 = std::min(cube[0], cube[1]);
         for (int i = 0; i < min1; ++i) {
-            cout << "AB-" << endl;
+            std::cout << "AB-" << std::endl;
         }
         cube[0] -= min1;
         cube[1] -= min1;
@@ -53,36 +51,36 @@ int main() {
 
     // обнуляем верину С (cube[2])
     if (cube[2] > 0) {
-        int min1 = min(cube[2], cube[1]);
+        int min1 = std::min(cube[2], cube[1]);
         for (int i = 0; i < min1; ++i) {
-            cout << "BC-" << endl;
+            std::cout << "BC-" << std::endl;
         }
         cube[2] -= min1;
         cube[1] -= min1;
 
-        int min2 = min(cube[2], cube[3]);
+        int min2 = std::min(cube[2], cube[3]);
         for (int i = 0; i < min2; ++i) {
-            cout << "CD-" << endl;
+            std::cout << "CD-" << std::endl;
         }
         cube[2] -= min2;
         cube[3] -= min2;
 
-        int min3 = min(cube[2], cube[6]);
+        int min3 = std::min(cube[2], cube[6]);
         for (int i = 0; i < min3; ++i) {
-            cout << "CG-" << endl;
+            std::cout << "CG-" << std::endl;
         }
         cube[2] -= min3;
         cube[6] -= min3;
 
         for (int i = 0; i < cube[2]; ++i) {
-            cout << "GH+" << endl;
+            std::cout << "GH+" << std::endl;
         }
         cube[6] += cube[2];
         cube[7] += cube[2];
 
-        min3 = min(cube[2], cube[6]);
+        min3 = std::min(cube[2], cube[6]);
         for (int i = 0; i < min3; ++i) {
-            cout << "CG-" << endl;
+            std::cout << "CG-" << std::endl;
         }
         cube[2] -= min3;
         cube[6] -= min3;
@@ -90,36 +88,36 @@ int main() {
 
     //обнуляем вершину F (cube[5])
     if (cube[5] > 0) {
-        int min1 = min(cube[5], cube[1]);
+        int min1 = std::min(cube[5], cube[1]);
         for (int i = 0; i < min1; ++i) {
-            cout << "BF-" << endl;
+            std::cout << "BF-" << std::endl;
         }
         cube[1] -= min1;
         cube[5] -= min1;
 
-        int min2 = min(cube[5], cube[4]);
+        int min2 = std::min(cube[5], cube[4]);
         for (int i = 0; i < min2; ++i) {
-            cout << "EF-" << endl;
+            std::cout << "EF-" << std::endl;
         }
         cube[4] -= min2;
         cube[5] -= min2;
 
-        int min3 = min(cube[5], cube[6]);
+        int min3 = std::min(cube[5], cube[6]);
         for (int i = 0; i < min3; ++i) {
-            cout << "FG-" << endl;
+            std::cout << "FG-" << std::endl;
         }
         cube[5] -= min3;
         cube[6] -= min3;
 
         for (int i = 0; i < cube[5]; ++i) {
-            cout << "GH+" << endl;
+            std::cout << "GH+" << std::endl;
         }
         cube[6] += cube[5];
         cube[7] += cube[5];
 
-        min3 = min(cube[5], cube[6]);
+        min3 = std::min(cube[5], cube[6]);
         for (int i = 0; i < min3; ++i) {
-            cout << "FG-" << endl;
+            std::cout << "FG-" << std::endl;
         }
         cube[5] -= min3;
         cube[6] -= min3;
@@ -127,32 +125,32 @@ int main() {
 
     //обнуляем вершину H (cube[7])
     if (cube[7] > 0) {
-        int min1 = min(cube[7], cube[3]);
+        int min1 = std::min(cube[7], cube[3]);
         for (int i = 0; i < min1; ++i) {
-            cout << "DH-" << endl;
+            std::cout << "DH-" << std::endl;
         }
         cube[7] -= min1;
         cube[3] -= min1;
 
-        int min2 = min(cube[7], cube[4]);
+        int min2 = std::min(cube[7], cube[4]);
         for (int i = 0; i < min2; ++i) {
-            cout << "EH-" << endl;
+            std::cout << "EH-" << std::endl;
         }
         cube[7] -= min2;
         cube[4] -= min2;
 
-        int min3 = min(cube[7], cube[6]);
+        int min3 = std::min(cube[7], cube[6]);
         for (int i = 0; i < min3; ++i) {
-            cout << "GH-" << endl;
+            std::cout << "GH-" << std::endl;
         }
         cube[7] -= min3;
         cube[6] -= min3;
     }
 
     for (int i = 0; i < cube[7]; ++i){
-        cout << "CD+" << endl;
-        cout << "BC-" << endl;
-        cout << "DH-" << endl;
+        std::cout << "CD+" << std::endl;
+        std::cout << "BC-" << std::endl;
+        std::cout << "DH-" << std::endl;
     }
     cube[1] -= cube[7];
     cube[7] = 0;

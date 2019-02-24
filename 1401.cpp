@@ -1,8 +1,6 @@
 #include <iostream>
 #include <cmath>
 
-using namespace std;
-
 int arr[512][512];
 
 // i, j - координаты начала квадрата
@@ -76,20 +74,20 @@ void gen(int x, int y, int i, int j, int n) {
 
 int main() {
     int n, x, y;
-    cin >> n >> y >> x;
+    std::cin >> n >> y >> x;
     x--;
     y--;
     n = (int) pow(2, n);
     if ((int) (pow(n, 2) - 1) % 3 != 0) {
-        cout << -1;
+        std::cout << -1;
         return 0;
     }
     gen(x, y, 0, 0, n);
     for (int i = 0; i < n; ++i) {
         for (int j = 0; j < n; ++j) {
-            cout << arr[i][j] << " ";
+            std::cout << arr[i][j] << " ";
         }
-        cout << endl;
+        std::cout << std::endl;
     }
     return 0;
 }
