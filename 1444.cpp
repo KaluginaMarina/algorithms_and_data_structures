@@ -9,8 +9,20 @@ struct point {
     double angle;
     int num;
 };
-int min_i;
-point p0;
+int n;
+point p[30001];
+
+int get_start() {
+    double max_a = 90 - p[n - 1].angle + 270 + p[1].angle;
+    int max_i = 1;
+    for (int i = 1; i < n - 1; ++i) {
+        if (p[i + 1].angle - p[i].angle > max_a) {
+            max_a = p[i + 1].angle - p[i].angle;
+            max_i = i + 1;
+        }
+    }
+    return max_i;
+}
 
 int comp(const void *v1, const void *v2) {
     const point *p1 = (point *) v1;
@@ -20,8 +32,8 @@ int comp(const void *v1, const void *v2) {
     } else if (p1->angle - p2->angle < -1e-10) {
         return -1;
     } else {
-        if ((p1->x - p0.x) * (p1->x - p0.x) + (p1->y - p0.y) * (p1->y - p0.y) >
-            (p2->x - p0.x) * (p2->x - p0.x) + (p2->y - p0.y) * (p2->y - p0.y)){
+        if ((p1->x - p[0].x) * (p1->x - p[0].x) + (p1->y - p[0].y) * (p1->y - p[0].y) >
+            (p2->x - p[0].x) * (p2->x - p[0].x) + (p2->y - p[0].y) * (p2->y - p[0].y)) {
             return 1;
         } else {
             return -1;
@@ -30,58 +42,43 @@ int comp(const void *v1, const void *v2) {
 }
 
 int main() {
-    int n;
     std::cin >> n;
-    point p[n];
-    long long int min_x = INT64_MAX;
-    long long int min_y = INT64_MAX;
     for (int i = 0; i < n; ++i) {
-        long long int x;
-        long long int y;
-        std::cin >> x;
-        std::cin >> y;
-        p[i].x = x;
-        if (x < min_x || (x == min_x && y < min_y)) {
-            min_x = x;
-            min_y = y;
-            min_i = i;
-        }
-        p[i].y = y;
+        std::cin >> p[i].x;
+        std::cin >> p[i].y;
         p[i].num = i;
-    }
-    p0 = p[min_i];
-
-    for (point &pn: p) {
-        if (pn.num == min_i) {
-            pn.angle = 0;
+        if (i == 0) {
+            p[i].angle = INT64_MIN;
             continue;
         }
-        if (pn.x - p[min_i].x == 0) {
-            pn.angle = (pn.y > p[min_i].y) ? 0 : 180;
+        if (p[i].x - p[0].x == 0) {
+            p[i].angle = (p[i].y > p[0].y) ? 90 : -90;
             continue;
         }
-        pn.angle = atan((double) (pn.y - p[min_i].y) / (pn.x - p[min_i].x)) * 180.0 / PI + 90;
+        p[i].angle = atan((double) (p[i].y - p[0].y) / (p[i].x - p[0].x)) * 180.0 / PI;
+        if ((p[i].x - p[0].x) <= 0) {
+            p[i].angle -= 180;
+        }
     }
 
     std::qsort(p, n, sizeof(point), comp);
 
-    for (point &pn: p) {
-        std::cout << "x: " << pn.x << " y: " << pn.y << " angle: " << pn.angle << " #" << pn.num << std::endl;
-    }
-
-    int k = 0;
-    while (p[k].num != 0) {
-        ++k;
-    }
+//    for (int i = 0; i < n; ++i) {
+//        std::cout << "x: " << p[i].x << " y: " << p[i].y << " angle: " << p[i].angle << " #" << p[i].num << std::endl;
+//    }
 
     std::cout << n << std::endl;
 
-    for (int i = 0; i < n; ++i) {
-        std::cout << p[k].num + 1 << std::endl;
-        ++k;
-        if (k == n) {
-            k = 0;
-        }
+    int k = get_start();
+
+    std::cout << 1 << std::endl;
+
+    for (int i = k; i < n; ++i) {
+        std::cout << p[i].num + 1 << std::endl;
+    }
+
+    for (int i = 1; i < k; ++i) {
+        std::cout << p[i].num + 1 << std::endl;
     }
     return 0;
 }
