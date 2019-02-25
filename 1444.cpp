@@ -34,36 +34,40 @@ int main() {
     std::cin >> n;
     point p[n];
     long long int min_x = INT64_MAX;
+    long long int min_y = INT64_MAX;
     for (int i = 0; i < n; ++i) {
-        int x;
+        long long int x;
+        long long int y;
         std::cin >> x;
+        std::cin >> y;
         p[i].x = x;
-        if (x < min_x) {
+        if (x < min_x || (x == min_x && y < min_y)) {
             min_x = x;
+            min_y = y;
             min_i = i;
         }
-        std::cin >> p[i].y;
+        p[i].y = y;
         p[i].num = i;
     }
     p0 = p[min_i];
 
     for (point &pn: p) {
         if (pn.num == min_i) {
-            pn.angle = INT32_MIN;
+            pn.angle = 0;
             continue;
         }
         if (pn.x - p[min_i].x == 0) {
-            pn.angle = (pn.y > p[min_i].y) ? 90 : -90;
+            pn.angle = (pn.y > p[min_i].y) ? 0 : 180;
             continue;
         }
-        pn.angle = atan((double) (pn.y - p[min_i].y) / (pn.x - p[min_i].x)) * 180.0 / PI;
+        pn.angle = atan((double) (pn.y - p[min_i].y) / (pn.x - p[min_i].x)) * 180.0 / PI + 90;
     }
 
     std::qsort(p, n, sizeof(point), comp);
 
-//    for (point &pn: p) {
-//        std::cout << "x: " << pn.x << " y: " << pn.y << " angle: " << pn.angle << " #" << pn.num << std::endl;
-//    }
+    for (point &pn: p) {
+        std::cout << "x: " << pn.x << " y: " << pn.y << " angle: " << pn.angle << " #" << pn.num << std::endl;
+    }
 
     int k = 0;
     while (p[k].num != 0) {
