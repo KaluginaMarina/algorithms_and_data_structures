@@ -3,6 +3,8 @@ project(algos)
 
 set(CMAKE_CXX_STANDARD 14)
 
+include_directories(SYSTEM ./lib)
+
 add_executable(algos_1 2025.cpp)
 add_executable(algos_2 1005.cpp)
 add_executable(algos_3 1155.cpp)
@@ -16,3 +18,4 @@ add_executable(algos_10 1322.cpp)
 add_executable(algos_11 1494.cpp)
 add_executable(algos_12 1521.cpp)
 add_executable(algos_13 1067.cpp)
+add_executable(algos_14 1628.cpp)
